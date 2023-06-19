@@ -1,0 +1,63 @@
+<!-- <div class="container"> -->
+  <!-- <h3>Welcome to: {{ hotelName }}</h3> -->
+  <!-- Interpolation-->
+
+  <app-header></app-header>
+
+  <div [hidden]="hideRooms">
+    Number of Rooms:
+    {{numberOfRooms}}
+    <div [innerText]="room.totalRooms"></div>
+    <!-- Property binding-->
+  </div>
+
+  <div *ngIf="selectedRoom">
+    {{selectedRoom | json}}
+  </div>
+
+  <button class="btn btn-primary" (click)="addRoom()">Add Room</button>
+
+  <!-- {{ room.availableRooms ?? 'No rooms' }} -->
+
+  <!--  JSON Pipe
+    {{roomList | json}}
+  -->
+  <!--
+    Optioanl chainning:  "room?.availableRooms" this is called optional channing. if room available
+    then availableRooms count will display otherwise simply ignore it.
+  -->
+
+  <div *ngIf="hideRooms">
+    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+  </div>
+
+  <!--
+  <div *ngIf="room.availableRooms >= 1">
+    <h4>Room List: {{room.availableRooms}}</h4>
+  </div>
+
+
+    *ngIf => It is a structral directive which I have used to display above div content if availableRooms value is greater than 1,
+    otherwise the Room List count will not be show on the page event if you inspect then can't find it.
+
+    1. Any directive start with * is called Structral directive, it can add or remove a DOM element so that's reason it is structral directive.
+    2. Attribute directive can't add or remove a DOM, it can only modify the DOM element.
+  -->
+
+  <!--
+
+    slice => This is a pipe symbol and I have used this to slice roomList records. Here 0:2 means it will take from 0 upto 1 and it will not take the last index record which is 2 in this case.
+    DecimalPipe => This pipe is used for transformation of decimal numbers.
+                    The first argument is a format string of the form ”{minIntegerDigits}. {minFractionDigits}-{maxFractionDigits}”,
+                    like so: {{ 3.14159265 | number: '1.1-4' }}, output: 3.1416
+  -->
+
+  <button class="btn btn-primary" style="margin-right: 2px;" (click)="toggle()">Toggle</button>
+  <button class="btn btn-primary" style="margin-right: 2px;" (click)="editRoom()">Edit Room</button>
+  <button class="btn btn-primary" (click)="deleteRoom()">Delete Room</button>
+
+
+  <h1>{{totalBytes}}</h1>
+
+  <!-- Event binding -->
+<!-- </div> -->
